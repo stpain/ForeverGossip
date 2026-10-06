@@ -1,0 +1,67 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
+https://raw.githubusercontent.com/Meorawr/wow-ui-schema/main/UI.xsd">
+
+    <Button name="ForeverGossipOptionTemplate" virtual="true">
+        <Size x="410" y="36"/>
+        <Layers>
+            <Layer level="BACKGROUND">
+                
+            </Layer>
+            <Layer level="ARTWORK">
+                <Texture hidden="false">
+                    <Size x="410" y="1"/>
+                    <Color color="WHITE_FONT_COLOR"/>
+                    <Gradient orientation="HORIZONTAL">
+                        <MinColor r="0.5" g="0.5" b="0.5" a="1"/>
+                        <MaxColor r="0.5" g="0.5" b="0.5" a="0.05"/>
+                    </Gradient>
+                    <Anchors>
+                        <Anchor point="BOTTOMLEFT" x="0" y="0"/>
+                    </Anchors>
+                </Texture>
+            </Layer>
+            <Layer level="OVERLAY">
+                <Texture parentKey="Tail" atlas="ChatBubble-Tail" useAtlasSize="true" hidden="true">
+                    <Anchors>
+                        <Anchor point="TOPLEFT" relativePoint="BOTTOMRIGHT" x="-25" y="7"/>
+                    </Anchors>
+                </Texture>
+                <Texture parentKey="Icon">
+                    <Size x="30" y="30"/>
+                    <Anchors>
+                        <Anchor point="LEFT" x="5" y="0"/>
+                    </Anchors>
+                </Texture>
+                <FontString parentKey="Text" inherits="GameFontNormal" justifyH="LEFT" justifyV="MIDDLE">
+                    <Size x="365" y="30"/>
+                    <Anchors>
+                        <Anchor point="LEFT" x="40" y="0"/>
+                    </Anchors>
+                </FontString>
+            </Layer>
+        </Layers>
+        <Scripts>
+            <OnLoad>
+                --NineSliceUtil.ApplyLayout(self, NineSliceLayouts.ChatBubble)
+            </OnLoad>
+            <OnEnter>
+                self.Text:SetFontObject("GameFontWhite");
+            </OnEnter>
+            <OnLeave>
+                self.Text:SetFontObject("GameFontNormal");
+            </OnLeave>
+        </Scripts>
+        <!-- <NormalTexture atlas="glues-characterSelect-card-camp-hover"/>
+        <HighlightTexture atlas="glues-characterSelect-card-glow">
+            <Anchors>
+                <Anchor point="TOPLEFT" x="-5" y="5"/>
+                <Anchor point="BOTTOMRIGHT" x="5" y="-5"/>
+            </Anchors>
+        </HighlightTexture> -->
+        <!-- <NormalTexture atlas="clickcastlist-buttonbackground"/>
+        <HighlightTexture atlas="clickcastlist-buttonhighlight"/> -->
+        <!-- <NormalTexture atlas="glues-characterSelect-card-glow"/>
+        <HighlightTexture atlas="glues-characterSelect-card-glow-swap"/> -->
+    </Button>
+
+</Ui>

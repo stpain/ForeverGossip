@@ -1,0 +1,465 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
+https://raw.githubusercontent.com/Meorawr/wow-ui-schema/main/UI.xsd">
+
+    <GameTooltip name="ForeverGossipScanningTooltip" hidden="true" inherits="SharedTooltipTemplate">
+        <Scripts>
+            <OnLoad inherit="prepend">
+                self:SetOwner(WorldFrame, "ANCHOR_NONE")
+            </OnLoad>
+        </Scripts>
+    </GameTooltip>
+
+    <Frame name="ForeverGossipQuestInfoItemHighlight" hidden="true">
+        <Size x="256" y="64"/>
+        <Anchors>
+            <Anchor point="TOPLEFT"/>
+        </Anchors>
+        <Layers>
+            <Layer level="BACKGROUND">
+                <Texture file="Interface\QuestFrame\UI-QuestItemHighlight" alphaMode="ADD">
+                    <Size x="256" y="64"/>
+                    <Anchors>
+                        <Anchor point="TOPLEFT"/>
+                    </Anchors>
+                </Texture>
+            </Layer>
+        </Layers>
+    </Frame>
+
+    <Frame name="ForeverGossipGoldCoinIcon" frameStrata="DIALOG" hidden="true">
+        <Size x="16" y="16"/>
+        <Layers>
+            <Layer level="ARTWORK">
+                <Texture parentKey="Icon" atlas="auctionhouse-icon-coin-gold">
+                    <Anchors>
+                        <Anchor point="TOPLEFT"/>
+                        <Anchor point="BOTTOMRIGHT"/>
+                    </Anchors>
+                </Texture>
+            </Layer>
+        </Layers>
+    </Frame>
+
+    <Frame name="QuestRewardsContainer" hidden="true">
+        <Size x="590" y="390"/>
+        <Layers>
+            <Layer level="OVERLAY">
+                <FontString parentKey="QuestRewardsHeader" inherits="GameFontNormalLarge" text="QUEST_REWARDS">
+                    <Anchors>
+                        <Anchor point="BOTTOMLEFT" relativePoint="TOPLEFT" x="0" y="3"/>
+                    </Anchors>
+                </FontString>
+                <FontString parentKey="ChoiceRewardsHeader" inherits="GameFontWhite" text="REWARD_CHOICES">
+                    <Anchors>
+                        <Anchor point="TOPLEFT"/>
+                    </Anchors>
+                </FontString>
+                <FontString parentKey="RewardsHeader" inherits="GameFontWhite" text="REWARD_CHOOSE">
+                    <Anchors>
+                        <Anchor point="TOPLEFT"/>
+                    </Anchors>
+                </FontString>
+                <FontString parentKey="MoneyRewardsHeader" inherits="GameFontWhite" text="REWARD_ITEMS_ONLY">
+                    <Anchors>
+                        <Anchor point="TOPLEFT"/>
+                    </Anchors>
+                </FontString>
+                <FontString parentKey="ExperienceRewardsHeader" inherits="GameFontWhite" text="EXPERIENCE_COLON">
+                    <Anchors>
+                        <Anchor point="TOPLEFT"/>
+                    </Anchors>
+                </FontString>
+            </Layer>
+        </Layers>
+        <Frames>
+            <Frame parentKey="QuestMoneyReward" inherits="MoneyDisplayFrameTemplate">
+                <Anchors>
+                    <Anchor point="LEFT" relativeKey="$parent.MoneyRewardsHeader" relativePoint="RIGHT" x="5"/>
+                </Anchors>
+                <KeyValues>
+                    <KeyValue key="leftAlign" value="true" type="boolean"/>
+                </KeyValues>
+            </Frame>
+        </Frames>
+    </Frame>
+
+    <Frame name="ForeverGossipUI" mixin="ForeverGossipMixin" frameStrata="HIGH" parent="UIParent" inherits="PortraitFrameTemplate" movable="true" hidden="true">
+
+        <Size x="1000" y="760"/>
+        <Anchors>
+            <Anchor point="CENTER" x="0" y="50"/>
+        </Anchors>
+
+        <Layers>
+            <Layer level="OVERLAY">
+                <FontString parentKey="GreetingText" inherits="GameFontNormal" justifyV="TOP">
+                    <Size y="90"/>
+                    <Anchors>
+                        <Anchor point="TOPLEFT" x="45" y="-105"/>
+                        <Anchor point="TOPRIGHT" x="-45" y="-105"/>
+                    </Anchors>
+                </FontString>
+            </Layer>
+        </Layers>
+
+        <Frames>
+
+            <Frame parentKey="InsetBorder" inherits="InsetFrameTemplate3" useParentLevel="true">
+                <Anchors>
+                    <Anchor point="TOPLEFT" x="5" y="-60"/>
+                    <Anchor point="BOTTOMRIGHT" x="-7" y="5"/>
+                </Anchors>
+                <Layers>
+                    <Layer level="BACKGROUND" textureSubLevel="1">
+                        <Texture parentKey="Background" atlas="auctionhouse-background-index">
+                            <Anchors>
+                                <Anchor point="TOPLEFT" x="2" y="-2"/>
+                                <Anchor point="BOTTOMRIGHT" x="-2" y="2"/>
+                            </Anchors>
+                        </Texture>
+                    </Layer>
+                    <Layer level="ARTWORK" textureSubLevel="3">
+                        <Texture atlas="collections-background-corner" useAtlasSize="true">
+                            <TexCoords left="0" right="1" top="0" bottom="1"/>
+                            <Anchors>
+                                <Anchor point="TOPLEFT" x="4" y="-4"/>
+                            </Anchors>
+                        </Texture>
+                        <Texture atlas="collections-background-corner" useAtlasSize="true">
+                            <TexCoords left="1" right="0" top="0" bottom="1"/>
+                            <Anchors>
+                                <Anchor point="TOPRIGHT" x="-4" y="-4"/>
+                            </Anchors>
+                        </Texture>
+                        <Texture atlas="collections-background-corner" useAtlasSize="true">
+                            <TexCoords left="0" right="1" top="1" bottom="0"/>
+                            <Anchors>
+                                <Anchor point="BOTTOMLEFT" x="4" y="4"/>
+                            </Anchors>
+                        </Texture>
+                        <Texture atlas="collections-background-corner" useAtlasSize="true">
+                            <TexCoords left="1" right="0" top="1" bottom="0"/>
+                            <Anchors>
+                                <Anchor point="BOTTOMRIGHT" x="-4" y="4"/>
+                            </Anchors>
+                        </Texture>
+                    </Layer>
+                </Layers>
+            </Frame>
+
+            <Button parentKey="Options">
+                <Anchors>
+                    <Anchor point="BOTTOMRIGHT" relativeKey="$parent.InsetBorder" relativePoint="TOPRIGHT" x="-8" y="1"/>
+                </Anchors>
+                <Size x="32" y="32"/>
+                <NormalTexture atlas="common-button-square-gray-up"/>
+                <PushedTexture atlas="common-button-square-gray-down"/>
+                <HighlightTexture atlas="WoWShare-Highlight">
+                    <Anchors>
+                        <Anchor point="TOPLEFT" x="5" y="-5"/>
+                        <Anchor point="BOTTOMRIGHT" x="-5" y="5"/>
+                    </Anchors>
+                </HighlightTexture>
+                    <Layers>
+                    <Layer level="OVERLAY">
+                        <Texture atlas="OptionsIcon-Brown">
+                            <Anchors>
+                                <Anchor point="CENTER"/>
+                            </Anchors>
+                            <Size x="14" y="14"/>
+                        </Texture>
+                    </Layer>
+                    </Layers>
+            </Button>
+
+            <Frame parentKey="GossipParent">
+                <Size x="600"/>
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeKey="$parent.InsetBorder" relativePoint="TOPLEFT" x="2" y="-140"/>
+                    <Anchor point="BOTTOMLEFT" x="2" y="2"/>
+                </Anchors>
+                <!-- <Frames>
+                    <Frame parentKey="ScrollBox" inherits="WowScrollBoxList">
+                        <Anchors>
+                            <Anchor point="TOPLEFT" x="5" y="-5"/>
+                            <Anchor point="BOTTOMRIGHT" x="-5" y="5"/>
+                        </Anchors>
+                    </Frame>
+                    <EventFrame parentKey="ScrollBar" inherits="MinimalScrollBar">
+                        <Anchors>
+                            <Anchor point="TOPLEFT" relativeKey="$parent.ScrollBox" relativePoint="TOPRIGHT" x="12" y="-6"/>
+                            <Anchor point="BOTTOMLEFT" relativeKey="$parent.ScrollBox" relativePoint="BOTTOMRIGHT" x="12" y="-4"/>
+                        </Anchors>
+                    </EventFrame>
+                </Frames> -->
+
+                <Frames>
+					<Button parentKey="GoodbyeButton" inherits="ThreeSliceButtonTemplate">
+						<Size x="140" y="35"/>
+						<Anchors>
+							<Anchor point="BOTTOM" relativePoint="BOTTOMRIGHT" x="-100" y="15"/>
+						</Anchors>
+                        <KeyValues>
+                            <KeyValue key="atlasName" value="128-RedButton" type="string"/>
+                        </KeyValues>
+						<Scripts>
+							<OnClick>
+								HideUIPanel(GossipFrame);
+                                ForeverGossipUI:Hide();
+							</OnClick>
+						</Scripts>
+                        <ButtonText text="GOODBYE" inherits="GameFontNormal">
+                            <Anchors>
+                                <Anchor point="CENTER"/>
+                            </Anchors>
+                        </ButtonText>
+					</Button>
+                </Frames>
+            </Frame>
+
+            <Frame parentKey="QuestGiverParent" hidden="true">
+                <Size x="600"/>
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeKey="$parent.InsetBorder" relativePoint="TOPLEFT" x="12" y="-140"/>
+                    <Anchor point="BOTTOMLEFT" x="12" y="12"/>
+                </Anchors>
+
+                <Frames>
+                    <!-- these buttons are handled in lua -->
+                </Frames>
+            </Frame>
+
+            <Frame parentKey="AvailableQuestParent" hidden="true">
+                <Size x="600"/>
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeKey="$parent.InsetBorder" relativePoint="TOPLEFT" x="12" y="-140"/>
+                    <Anchor point="BOTTOMLEFT" x="12" y="12"/>
+                </Anchors>
+
+                <Frames>
+                    <Frame parentKey="QuestDescriptionText" inherits="ScrollingFontTemplate">
+                        <Size x="590" y="120"/>
+                        <Anchors>
+                            <Anchor point="TOPLEFT" x="5" y="-5"/>
+                        </Anchors>
+                        <KeyValues>
+                            <KeyValue key="fontName" value="GameFontWhite"/>
+                        </KeyValues>
+                    </Frame>
+                    <Frame parentKey="QuestObjectiveText" inherits="ScrollingFontTemplate">
+                        <Size x="590" y="50"/>
+                        <Anchors>
+                            <Anchor point="TOPLEFT" relativeKey="$parent.QuestDescriptionText" relativePoint="BOTTOMLEFT" x="0" y="-40"/>
+                        </Anchors>
+                        <KeyValues>
+                            <KeyValue key="fontName" value="GameFontWhite"/> 
+                        </KeyValues>
+                    </Frame>
+
+					<Button parentKey="QuestFrameDeclineButton" inherits="ThreeSliceButtonTemplate">
+						<Size x="140" y="35"/>
+						<Anchors>
+							<Anchor point="BOTTOMLEFT" relativePoint="BOTTOMRIGHT" x="-75" y="5"/>
+						</Anchors>
+                        <KeyValues>
+                            <KeyValue key="atlasName" value="128-RedButton" type="string"/>
+                        </KeyValues>
+						<Scripts>
+							<OnClick function="QuestDetailDeclineButton_OnClick"/>
+						</Scripts>
+                        <ButtonText text="DECLINE" inherits="GameFontNormal">
+                            <Anchors>
+                                <Anchor point="CENTER"/>
+                            </Anchors>
+                        </ButtonText>
+					</Button>
+
+					<Button parentKey="QuestFrameAcceptButton" inherits="ThreeSliceButtonTemplate">
+						<Size x="140" y="35"/>
+						<Anchors>
+							<Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMRIGHT" x="-125" y="5"/>
+						</Anchors>
+                        <KeyValues>
+                            <KeyValue key="atlasName" value="128-RedButton" type="string"/>
+                        </KeyValues>
+						<Scripts>
+							<OnClick function="QuestDetailAcceptButton_OnClick"/>
+						</Scripts>
+                        <ButtonText text="ACCEPT" inherits="GameFontNormal">
+                            <Anchors>
+                                <Anchor point="CENTER"/>
+                            </Anchors>
+                        </ButtonText>
+					</Button>
+                </Frames>
+
+                <Layers>
+                    <Layer level="OVERLAY">
+                        <FontString parentKey="QuestDescriptionHeader" inherits="GameFontNormalLarge" text="QUEST_DESCRIPTION">
+                            <Anchors>
+                                <Anchor point="BOTTOMLEFT" relativeKey="$parent.QuestDescriptionText" relativePoint="TOPLEFT" x="0" y="3"/>
+                            </Anchors>
+                        </FontString>
+                        <FontString parentKey="QuestDescriptionHeader" inherits="GameFontNormalLarge" text="QUEST_OBJECTIVES">
+                            <Anchors>
+                                <Anchor point="BOTTOMLEFT" relativeKey="$parent.QuestObjectiveText" relativePoint="TOPLEFT" x="0" y="3"/>
+                            </Anchors>
+                        </FontString>
+                    </Layer>
+                </Layers>
+            </Frame>
+
+            <Frame parentKey="ActiveQuestParent" hidden="true">
+                <Size x="600"/>
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeKey="$parent.InsetBorder" relativePoint="TOPLEFT" x="12" y="-140"/>
+                    <Anchor point="BOTTOMLEFT" x="12" y="12"/>
+                </Anchors>
+
+
+                <Frames>
+                    <Frame parentKey="QuestProgressText" inherits="ScrollingFontTemplate">
+                        <Size x="590" y="150"/>
+                        <Anchors>
+                            <Anchor point="TOPLEFT" x="5" y="-5"/>
+                        </Anchors>
+                        <KeyValues>
+                            <KeyValue key="fontName" value="GameFontWhite"/> 
+                        </KeyValues>
+                    </Frame>
+
+					<Button parentKey="QuestFrameGoodbyeButton" inherits="ThreeSliceButtonTemplate">
+						<Size x="140" y="35"/>
+						<Anchors>
+							<Anchor point="BOTTOMLEFT" relativePoint="BOTTOMRIGHT" x="-75" y="5"/>
+						</Anchors>
+                        <KeyValues>
+                            <KeyValue key="atlasName" value="128-RedButton" type="string"/>
+                        </KeyValues>
+						<Scripts>
+							<OnClick function="QuestGoodbyeButton_OnClick"/>
+						</Scripts>
+                        <ButtonText text="CANCEL" inherits="GameFontNormal">
+                            <Anchors>
+                                <Anchor point="CENTER"/>
+                            </Anchors>
+                        </ButtonText>
+					</Button>
+
+					<Button parentKey="QuestFrameCompleteButton" inherits="ThreeSliceButtonTemplate">
+						<Size x="140" y="35"/>
+						<Anchors>
+							<Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMRIGHT" x="-125" y="5"/>
+						</Anchors>
+                        <KeyValues>
+                            <KeyValue key="atlasName" value="128-RedButton" type="string"/>
+                        </KeyValues>
+						<Scripts>
+							<OnClick function="QuestProgressCompleteButton_OnClick"/>
+						</Scripts>
+                        <ButtonText text="CONTINUE" inherits="GameFontNormal">
+                            <Anchors>
+                                <Anchor point="CENTER"/>
+                            </Anchors>
+                        </ButtonText>
+					</Button>
+
+                </Frames>
+
+                <Layers>
+                    <Layer level="OVERLAY">
+                        <FontString parentKey="QuestRequiredItemsHeader" inherits="GameFontNormal" text="TURN_IN_ITEMS">
+                            <Anchors>
+                                <Anchor point="TOPLEFT" relativeKey="$parent.QuestProgressText" relativePoint="BOTTOMLEFT" x="0" y="-30"/>
+                            </Anchors>
+                        </FontString>
+                    </Layer>
+                </Layers>
+
+            </Frame>
+
+            <Frame parentKey="CompleteQuestParent" hidden="true">
+                <Size x="600"/>
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeKey="$parent.InsetBorder" relativePoint="TOPLEFT" x="12" y="-140"/>
+                    <Anchor point="BOTTOMLEFT" x="12" y="12"/>
+                </Anchors>
+
+
+                <Frames>
+                    <Frame parentKey="QuestRewardsText" inherits="ScrollingFontTemplate">
+                        <Size x="590" y="150"/>
+                        <Anchors>
+                            <Anchor point="TOPLEFT" x="5" y="-5"/>
+                        </Anchors>
+                        <KeyValues>
+                            <KeyValue key="fontName" value="GameFontWhite"/> 
+                        </KeyValues>
+                    </Frame>
+
+					<Button parentKey="QuestFrameCancelButton" inherits="ThreeSliceButtonTemplate">
+						<Size x="140" y="35"/>
+						<Anchors>
+							<Anchor point="BOTTOMLEFT" relativePoint="BOTTOMRIGHT" x="-75" y="5"/>
+						</Anchors>
+                        <KeyValues>
+                            <KeyValue key="atlasName" value="128-RedButton" type="string"/>
+                        </KeyValues>
+						<Scripts>
+							<OnClick function="QuestRewardCancelButton_OnClick"/>
+						</Scripts>
+                        <ButtonText text="CANCEL" inherits="GameFontNormal">
+                            <Anchors>
+                                <Anchor point="CENTER"/>
+                            </Anchors>
+                        </ButtonText>
+					</Button>
+
+					<Button parentKey="QuestFrameCompleteQuestButton" inherits="ThreeSliceButtonTemplate">
+						<Size x="140" y="35"/>
+						<Anchors>
+							<Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMRIGHT" x="-125" y="5"/>
+						</Anchors>
+                        <KeyValues>
+                            <KeyValue key="atlasName" value="128-RedButton" type="string"/>
+                        </KeyValues>
+						<Scripts>
+							<OnClick function="QuestRewardCompleteButton_OnClick"/>
+						</Scripts>
+                        <ButtonText text="COMPLETE_QUEST" inherits="GameFontNormal">
+                            <Anchors>
+                                <Anchor point="CENTER"/>
+                            </Anchors>
+                        </ButtonText>
+					</Button>
+
+                </Frames>
+            </Frame>
+
+            <PlayerModel parentKey="Model">
+                <Size x="600"/>
+                <Anchors>
+                    <Anchor point="TOPRIGHT" relativeKey="$parent.InsetBorder" relativePoint="TOPRIGHT" x="-2" y="-100"/>
+                    <Anchor point="BOTTOMRIGHT" relativeKey="$parent.InsetBorder" relativePoint="BOTTOMRIGHT" x="-2" y="2"/>
+                </Anchors>
+            </PlayerModel>
+
+        </Frames>
+
+
+        <Scripts>
+            <OnLoad method="OnLoad"/>
+            <OnEvent method="OnEvent"/>
+            <OnShow method="OnShow"/>
+            <OnHide method="OnHide"/>
+            <OnDragStart>
+                self:StartMoving()
+            </OnDragStart>
+            <OnDragStop>
+                self:StopMovingOrSizing()
+            </OnDragStop>
+        </Scripts>
+    </Frame>
+
+
+</Ui>
